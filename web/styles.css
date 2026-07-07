@@ -209,6 +209,8 @@ footer {
 footer .brand { color: var(--idle); font-weight: 700; letter-spacing: var(--tracking-wide); }
 footer .brand .mark { color: var(--accent); }
 footer .brand .sub { color: var(--faint); font-weight: 400; letter-spacing: var(--tracking); }
+footer .home { color: var(--faint); text-decoration: none; }
+footer .home:hover { color: var(--accent); }
 #help-open {
   background: none;
   border: none;
