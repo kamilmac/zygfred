@@ -7,8 +7,8 @@
   --idle: hsl(0 12% 69%);
   --dim: hsl(0 13% 42%);
   --faint: hsl(0 13% 32%);
-  --bg: #0b0b0b;
-  --panel: hsl(0 0% 7.3%);
+  --bg: #0c0c0c;
+  --panel: hsl(0 0% 8% / 1);
   --inset: hsl(0 0% 2.8%);
   --track: hsl(0 0% 12.8%);
 }
