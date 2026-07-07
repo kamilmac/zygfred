@@ -52,6 +52,25 @@ $('#help').addEventListener('pointerdown', (e) => {
   if (e.target === e.currentTarget) $('#help').hidden = true; // backdrop closes; the sheet doesn't
 });
 
+// ---------- installed-app window ----------
+
+// browsers give no control over a PWA window's initial size, but a standalone window may
+// resize itself — snap it to the content once; Chrome remembers the size for next launches
+function fitWindow() {
+  if (!matchMedia('(display-mode: standalone)').matches) return;
+  const tokens = getComputedStyle(document.documentElement);
+  const appW = parseInt(tokens.getPropertyValue('--app-width'));
+  const padX = parseInt(tokens.getPropertyValue('--sp-page-x'));
+  const padBottom = parseInt(tokens.getPropertyValue('--sp-page'));
+  const contentW = appW + 2 * padX;
+  const contentH = Math.ceil(document.querySelector('footer').getBoundingClientRect().bottom) + padBottom;
+  window.resizeTo(
+    contentW + (window.outerWidth - window.innerWidth),
+    contentH + (window.outerHeight - window.innerHeight),
+  );
+}
+requestAnimationFrame(fitWindow);
+
 // ---------- global input ----------
 
 // browsers require one user gesture before audio can run — hijack the first natural one
@@ -59,6 +78,7 @@ let midiStarted = false;
 function wake() {
   engine.resume();
   $('#locked').hidden = true;
+  fitWindow(); // some platforms only allow self-resize after a gesture
   if (!midiStarted) {
     midiStarted = true;
     midi.start();
