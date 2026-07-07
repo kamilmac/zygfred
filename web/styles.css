@@ -1,5 +1,7 @@
 :root {
-  /* the palette: near-black surface, white chassis, cyan/pink/yellow voices */
+  /* the palette: near-black surface, white chassis, cyan/pink/yellow voices.
+     fixed — never follows the system theme (color-scheme locks UA widgets too) */
+  color-scheme: dark;
   --accent: #f0eeea;
   --voice0: #7dc9d1;
   --voice1: #b8486d;
