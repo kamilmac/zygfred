@@ -1,36 +1,21 @@
-:root {
-  /* the palette: near-black surface, white chassis, cyan/pink/yellow voices.
-     fixed — never follows the system theme (color-scheme locks UA widgets too) */
-  color-scheme: dark;
-  --accent: #f0eeea;
-  --voice0: #7dc9d1;
-  --voice1: #b8486d;
-  --voice2: #d8bf5f;
-  --idle: hsl(0 12% 69%);
-  --dim: hsl(0 13% 42%);
-  --faint: hsl(0 13% 32%);
-  --bg: #0c0c0c;
-  --panel: hsl(0 0% 8% / 1);
-  --inset: hsl(0 0% 2.8%);
-  --track: hsl(0 0% 12.8%);
-}
+/* structure only — every tunable value lives in theme.css */
 * { box-sizing: border-box; margin: 0; }
 body {
   background: var(--bg);
   color: var(--idle);
-  font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+  font: var(--font);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 24px 40px;
+  padding: var(--sp-section) var(--sp-page-x) var(--sp-page);
   user-select: none;
   -webkit-user-select: none;
 }
 
 #voices {
   display: flex;
-  gap: 20px;
+  gap: var(--sp-section);
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -39,11 +24,11 @@ body {
 .voice[data-voice="2"] { --accent: var(--voice2); }
 .voice {
   background: var(--panel);
-  padding: 20px;
-  width: 282px;
+  padding: var(--sp-section);
+  width: var(--voice-width);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--sp-row);
   transition: box-shadow 0.25s ease-out;
 }
 .voice.hit { animation: flash 0.25s ease-out; }
@@ -57,10 +42,10 @@ body {
   color: var(--accent);
   font: inherit;
   font-weight: 700;
-  letter-spacing: 2px;
-  padding: 12px;
+  letter-spacing: var(--tracking-wide);
+  padding: var(--sp-block);
   cursor: pointer;
-  margin-bottom: 12px;
+  margin-bottom: var(--sp-block);
   /* keycap: raised bottom edge that depresses on press */
   box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--accent) 28%, transparent);
 }
@@ -69,25 +54,25 @@ body {
   background: color-mix(in srgb, var(--accent) 18%, transparent);
   box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--accent) 28%, transparent);
   transform: translateY(2px);
-  padding-bottom: 10px;
+  padding-bottom: calc(var(--sp-block) - 2px);
 }
 .pad .key {
   color: var(--dim);
   font-weight: 400;
   letter-spacing: 0;
-  margin-left: 10px;
+  margin-left: var(--gap-inline);
   background: color-mix(in srgb, #000 35%, transparent);
   padding: 1px 8px;
   box-shadow: inset 0 -2px 0 color-mix(in srgb, #000 55%, transparent);
 }
-.row { display: flex; align-items: center; gap: 10px; }
-.voice .row.sect { margin-top: 12px; }
-.label { width: 52px; color: var(--dim); flex: none; }
-.row .val { width: 40px; text-align: right; color: var(--dim); flex: none; }
+.row { display: flex; align-items: center; gap: var(--gap-inline); }
+.voice .row.sect { margin-top: var(--sp-block); }
+.label { width: var(--label-w); color: var(--dim); flex: none; }
+.row .val { width: var(--val-w); text-align: right; color: var(--dim); flex: none; }
 .bar {
   flex: 1;
-  height: 13px;
-  background: repeating-linear-gradient(90deg, var(--track) 0 6px, transparent 6px 8px);
+  height: var(--bar-h);
+  background: repeating-linear-gradient(90deg, var(--track) 0 var(--seg), transparent var(--seg) var(--seg-period));
   cursor: ew-resize;
   touch-action: none;
   overflow: hidden;
@@ -95,7 +80,7 @@ body {
 }
 .fill {
   height: 100%;
-  background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 8px);
+  background: repeating-linear-gradient(90deg, var(--accent) 0 var(--seg), transparent var(--seg) var(--seg-period));
   pointer-events: none;
 }
 .range {
@@ -114,7 +99,7 @@ body {
   margin-left: -1px;
   opacity: 1;
   pointer-events: none;
-  background: #fff;
+  background: var(--tick);
 }
 .row.rand-on {
   background: color-mix(in srgb, var(--accent) 7%, transparent);
@@ -124,39 +109,39 @@ body {
 .row.rand-on .val { color: var(--accent); }
 .scope {
   width: 100%;
-  height: 58px;
+  height: var(--scope-h);
   background: var(--inset);
   border: none;
-  margin: 12px 0;
+  margin: var(--sp-block) 0;
 }
 #master {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 8px 32px;
+  gap: var(--sp-row) 32px;
   background: var(--panel);
-  padding: 20px;
-  margin-top: 20px;
-  width: min(886px, 100%);
+  padding: var(--sp-section);
+  margin-top: var(--sp-section);
+  width: min(var(--app-width), 100%);
 }
 #midi { gap: 14px; }
 #presets, #midi {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sp-row);
   background: var(--panel);
-  padding: 12px 20px;
-  margin-top: 20px;
-  width: min(886px, 100%);
-  font-size: 12px;
+  padding: var(--sp-block) var(--sp-section);
+  margin-top: var(--sp-section);
+  width: min(var(--app-width), 100%);
+  font-size: var(--text-small);
   color: var(--dim);
 }
-#presets .tag { color: var(--faint); letter-spacing: 2px; margin-right: 6px; }
+#presets .tag { color: var(--faint); letter-spacing: var(--tracking-wide); margin-right: 6px; }
 #presets .slot {
   background: var(--inset);
   border: none;
   color: var(--faint);
   font: inherit;
-  width: 28px;
+  width: var(--slot-w);
   padding: 4px 0;
   cursor: pointer;
 }
@@ -170,7 +155,7 @@ body {
 #presets .slot.active { color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
 #presets .hint { margin-left: auto; text-align: right; color: var(--faint); }
 #presets .hint.accent { color: var(--accent); }
-#midi .tag { color: var(--faint); letter-spacing: 2px; }
+#midi .tag { color: var(--faint); letter-spacing: var(--tracking-wide); }
 #midi select {
   background: var(--inset);
   color: var(--idle);
@@ -184,7 +169,7 @@ body {
   border: none;
   color: var(--dim);
   font: inherit;
-  letter-spacing: 1px;
+  letter-spacing: var(--tracking);
   padding: 4px 14px;
   cursor: pointer;
 }
@@ -203,7 +188,7 @@ body {
   background: var(--accent);
   color: var(--bg);
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: var(--tracking);
   text-align: center;
   padding: 10px;
   z-index: 30;
@@ -214,16 +199,16 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 20px;
+  gap: var(--sp-section);
   flex-wrap: wrap;
-  width: min(886px, 100%);
+  width: min(var(--app-width), 100%);
   color: var(--faint);
-  font-size: 12px;
-  margin-top: 20px;
+  font-size: var(--text-small);
+  margin-top: var(--sp-section);
 }
-footer .brand { color: var(--idle); font-weight: 700; letter-spacing: 2px; }
+footer .brand { color: var(--idle); font-weight: 700; letter-spacing: var(--tracking-wide); }
 footer .brand .mark { color: var(--accent); }
-footer .brand .sub { color: var(--faint); font-weight: 400; letter-spacing: 1px; }
+footer .brand .sub { color: var(--faint); font-weight: 400; letter-spacing: var(--tracking); }
 #help-open {
   background: none;
   border: none;
@@ -251,6 +236,6 @@ footer .brand .sub { color: var(--faint); font-weight: 400; letter-spacing: 1px;
   overflow-y: auto;
   box-shadow: 0 6px 30px color-mix(in srgb, #000 45%, transparent);
 }
-#help p { color: var(--dim); font-size: 12px; margin: 0 0 14px; line-height: 1.7; }
+#help p { color: var(--dim); font-size: var(--text-small); margin: 0 0 14px; line-height: 1.7; }
 #help p:last-child { margin-bottom: 0; }
 #help .key { color: var(--idle); }

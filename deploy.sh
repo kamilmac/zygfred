@@ -10,7 +10,7 @@ wasm-pack build engine --target web --release --out-dir ../web/pkg
 
 SITE=$(mktemp -d)
 mkdir -p "$SITE/app" "$SITE/pkg"
-cp web/index.html web/styles.css web/manifest.webmanifest web/icon-192.png web/icon-512.png "$SITE/"
+cp web/index.html web/theme.css web/styles.css web/manifest.webmanifest web/icon-192.png web/icon-512.png "$SITE/"
 cp web/pkg/zygfred_engine_bg.wasm "$SITE/pkg/"
 
 # bundle: source stays per-domain modules; the site ships two minified files.

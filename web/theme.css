@@ -1,0 +1,49 @@
+/* theme — every UI/UX decision in one file: palette, type, spacing, dimensions.
+   Portable: copy to a sibling app (zygmund, …) and reskin it by editing only this file.
+   Fixed — never follows the system theme (color-scheme locks UA widgets too). */
+:root {
+  color-scheme: dark;
+
+  /* surfaces, darkest to lightest */
+  --bg: #0c0c0c;
+  --inset: hsl(0 0% 2.8%);
+  --panel: hsl(0 0% 8% / 1);
+  --track: hsl(0 0% 12.8%);
+
+  /* ink */
+  --idle: hsl(0 12% 69%);
+  --dim: hsl(0 13% 42%);
+  --faint: hsl(0 13% 32%);
+
+  /* accents: white chassis + one color per voice/channel */
+  --accent: #f0eeea;
+  --voice0: #7dc9d1;
+  --voice1: #b8486d;
+  --voice2: #d8bf5f;
+  --tick: #fff;
+
+  /* type */
+  --font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+  --text-small: 12px;
+  --tracking: 1px;
+  --tracking-wide: 2px;
+
+  /* spacing ladder: row rhythm / block step / section + panel padding / page frame */
+  --sp-row: 8px;
+  --sp-block: 12px;
+  --sp-section: 20px;
+  --sp-page: 40px;
+  --sp-page-x: 24px;
+  --gap-inline: 10px; /* label · bar · value */
+
+  /* dimensions */
+  --app-width: 886px;
+  --voice-width: 282px;
+  --bar-h: 13px;
+  --scope-h: 58px;
+  --slot-w: 28px;
+  --label-w: 52px;
+  --val-w: 40px;
+  --seg: 6px;        /* bar segment width */
+  --seg-period: 8px; /* segment + gap */
+}
