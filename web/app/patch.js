@@ -18,14 +18,20 @@ export const BIT_OPTIONS = [
   ['off', 0], ['12bit', 2048], ['8bit', 128], ['6bit', 32], ['4bit', 8], ['3bit', 4],
 ];
 
-// ordered as the signal flows through the engine: reverb -> drive -> bits -> comp -> volume
+// ordered as the signal flows through the engine: reverb -> drive -> bits -> comp -> volume.
+// a param with `options` is discrete: its 0..1 value snaps to an option, and the engine is
+// sent that option's value instead of the raw normal
 export const MASTER = [
   { name: 'Reverb', msg: 'reverb', value: 0.0 },
   { name: 'Drive', msg: 'drive', value: 0.0 },
-  { name: 'Bits', msg: 'bits', value: 0.0 }, // value unused; bits live in state.bitsIdx
+  { name: 'Bits', msg: 'bits', value: 0.0, options: BIT_OPTIONS },
   { name: 'Comp', msg: 'comp', value: 0.0 },
   { name: 'Volume', msg: 'volume', value: 0.7 },
 ];
+
+const optionIdx = (m) => Math.round(m.value * (m.options.length - 1));
+export const masterValue = (m) => (m.options ? m.options[optionIdx(m)][1] : m.value);
+export const masterLabel = (m) => (m.options ? m.options[optionIdx(m)][0] : `${Math.round(m.value * 100)}`);
 
 const DEFAULTS = [
   [0.18, 0.10, 0.20, 0.70, 0.55, 0.65, 0.45, 0.10, 0.10, 0.15, 0.10, 1.00, 1.00],
@@ -38,7 +44,6 @@ export const KEY_SEMITONE = { a: 0, w: 1, s: 2, e: 3, d: 4, f: 5, t: 6, g: 7, y:
 export const SEMITONE_DRUM = { 0: 0, 2: 1, 4: 2 };
 
 export const drums = DEFAULTS.map((p) => [...p]);
-export const state = { bitsIdx: 0 };
 
 export const clamp01 = (v) => Math.min(1, Math.max(0, v));
 const rnd = () => Math.random() * 2 - 1;
@@ -66,7 +71,8 @@ export function hitTakes(drum, vel = 0.9) {
 }
 
 export function snapshot() {
-  // master values keyed by name — immune to strip reordering
-  const master = Object.fromEntries(MASTER.filter((m) => m.msg !== 'bits').map((m) => [m.msg, m.value]));
-  return { drums: drums.map((p) => [...p]), master, bits: state.bitsIdx };
+  // master values keyed by name — immune to strip reordering; discrete params store their
+  // normalized value like everything else
+  const master = Object.fromEntries(MASTER.map((m) => [m.msg, m.value]));
+  return { drums: drums.map((p) => [...p]), master };
 }

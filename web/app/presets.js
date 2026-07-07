@@ -7,16 +7,22 @@ export const SLOTS = 8;
 
 let presets = {};
 try { presets = JSON.parse(localStorage.getItem(PRESET_KEY) || '{}'); } catch { /* fresh */ }
-// v3: master stored by name (was a positional array [drive, reverb, comp, bits, volume])
-if (localStorage.getItem('zygfred-presets-v') !== '3') {
+// schema migrations (constants below are historical facts of old schemas, frozen on purpose):
+// v3: master by name (was positional [drive, reverb, comp, bits, volume])
+// v4: bits folds into master as a normalized value (was a separate option index 0..5)
+if (localStorage.getItem('zygfred-presets-v') !== '4') {
   Object.values(presets).forEach((st) => {
     if (Array.isArray(st.master)) {
       const [drive, reverb, comp, , volume] = st.master;
       st.master = { drive, reverb, comp, volume };
     }
+    if ('bits' in st) {
+      st.master.bits = st.bits / 5;
+      delete st.bits;
+    }
   });
   localStorage.setItem(PRESET_KEY, JSON.stringify(presets));
-  localStorage.setItem('zygfred-presets-v', '3');
+  localStorage.setItem('zygfred-presets-v', '4');
 }
 let currentSlot = null;
 const slotSyncs = [];

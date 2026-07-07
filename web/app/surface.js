@@ -3,7 +3,7 @@
 // into DOM and pointer input back into patch mutations. Cross-domain calls (pad -> trigger,
 // master -> engine, learn interception) are injected by main.
 
-import { PARAMS, P_RAND, DRUMS, BIT_OPTIONS, MASTER, drums, state } from './patch.js';
+import { PARAMS, P_RAND, DRUMS, MASTER, drums, masterValue, masterLabel } from './patch.js';
 
 // registry of every learnable control, indexed by id: drum params first (drum*13+param,
 // incl. per-voice Vol), then master
@@ -195,22 +195,17 @@ function buildMaster() {
     const label = document.createElement('span');
     label.className = 'label';
     label.textContent = m.name;
-    const isBits = m.msg === 'bits';
     const { bar, val } = makeBar({
       id: DRUMS.length * PARAMS.length + mi,
       name: m.name,
-      discreteSteps: isBits ? BIT_OPTIONS.length : 0,
-      getNorm: () => (isBits ? state.bitsIdx / (BIT_OPTIONS.length - 1) : m.value),
+      discreteSteps: m.options ? m.options.length : 0,
+      getNorm: () => m.value,
       setNorm: (n) => {
-        if (isBits) {
-          state.bitsIdx = Math.round(n * (BIT_OPTIONS.length - 1));
-          send({ type: 'bits', value: BIT_OPTIONS[state.bitsIdx][1] });
-        } else {
-          m.value = n;
-          send({ type: m.msg, value: n });
-        }
+        // discrete params snap to their option grid so the stored value round-trips exactly
+        m.value = m.options ? Math.round(n * (m.options.length - 1)) / (m.options.length - 1) : n;
+        send({ type: m.msg, value: masterValue(m) });
       },
-      getLabel: () => (isBits ? BIT_OPTIONS[state.bitsIdx][0] : `${Math.round(m.value * 100)}`),
+      getLabel: () => masterLabel(m),
     });
     cell.append(label, bar, val);
     strip.appendChild(cell);

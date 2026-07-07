@@ -1,7 +1,7 @@
 // main — the one place the domains meet. Wires patch / engine / surface / scope /
 // midi / presets together, owns the trigger path and global input (keyboard, wake gesture).
 
-import { PARAMS, DRUMS, BIT_OPTIONS, MASTER, KEY_SEMITONE, SEMITONE_DRUM, state, hitTakes, snapshot } from './patch.js';
+import { PARAMS, DRUMS, MASTER, KEY_SEMITONE, SEMITONE_DRUM, hitTakes, snapshot, masterValue } from './patch.js';
 import * as engine from './engine.js';
 import * as surface from './surface.js';
 import * as scope from './scope.js';
@@ -28,8 +28,7 @@ function applyState(st) {
   st.drums.forEach((p, d) => p.forEach((v, i) => surface.controls[d * PARAMS.length + i]?.apply(v)));
   const base = DRUMS.length * PARAMS.length;
   MASTER.forEach((m, mi) => {
-    if (m.msg === 'bits') surface.controls[base + mi]?.apply(st.bits / (BIT_OPTIONS.length - 1));
-    else if (st.master[m.msg] !== undefined) surface.controls[base + mi]?.apply(st.master[m.msg]);
+    if (st.master[m.msg] !== undefined) surface.controls[base + mi]?.apply(st.master[m.msg]);
   });
   surface.updateAllBands();
   scope.drawAll();
@@ -107,10 +106,7 @@ document.addEventListener('keydown', (e) => {
 
 engine.boot().then(({ ctx, node }) => {
   // push full master state to the audio thread
-  MASTER.forEach((m, mi) => {
-    if (m.msg !== 'bits') engine.send({ type: m.msg, value: m.value });
-  });
-  engine.send({ type: 'bits', value: BIT_OPTIONS[state.bitsIdx][1] });
+  MASTER.forEach((m) => engine.send({ type: m.msg, value: masterValue(m) }));
   scope.init({ sampleRate: engine.sampleRate });
   scope.drawAll();
   // debug/inspection surface
