@@ -7,7 +7,6 @@ import * as surface from './surface.js';
 import * as scope from './scope.js';
 import * as midi from './midi.js';
 import * as presets from './presets.js';
-import { capture_spectrogram } from '../pkg/zygfred_engine.js';
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -38,7 +37,7 @@ function applyState(st) {
 
 // ---------- wiring ----------
 
-surface.init({ onPad: trigger, send: engine.send, pickControl: midi.tryArmLearn });
+surface.init({ onPad: trigger, send: engine.send, pickControl: midi.tryArmLearn, registerCanvas: scope.registerCanvas });
 midi.init({ trigger, controls: surface.controls, onLockedNote: () => { if (engine.suspended()) $('#locked').hidden = false; } });
 presets.init({ snapshot, apply: applyState });
 
@@ -115,11 +114,5 @@ engine.boot().then(({ ctx, node }) => {
   scope.init({ sampleRate: engine.sampleRate });
   scope.drawAll();
   // debug/inspection surface
-  window.zyg = {
-    ctx,
-    node,
-    trigger,
-    onMidiMessage: midi.onMidiMessage,
-    capture: (p, secs = 0.6) => capture_spectrogram(new Float32Array(p), engine.sampleRate(), 256, 56, secs),
-  };
+  window.zyg = { ctx, node, trigger, onMidiMessage: midi.onMidiMessage };
 }).catch((err) => console.error('boot failed:', err));

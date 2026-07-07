@@ -4,7 +4,6 @@
 // master -> engine, learn interception) are injected by main.
 
 import { PARAMS, P_RAND, DRUMS, BIT_OPTIONS, MASTER, drums, state } from './patch.js';
-import { registerCanvas } from './scope.js';
 
 // registry of every learnable control, indexed by id: drum params first (drum*13+param,
 // incl. per-voice Vol), then master
@@ -13,11 +12,13 @@ export const controls = [];
 let onPad = () => {};
 let send = () => {};
 let pickControl = () => false; // midi learn: intercept a bar click as "learn this control"
+let registerCanvas = () => {};
 
 export function init(deps) {
   onPad = deps.onPad;
   send = deps.send;
   pickControl = deps.pickControl;
+  registerCanvas = deps.registerCanvas;
 }
 
 function makeBar({ id, name, getNorm, setNorm, getLabel, discreteSteps }) {
