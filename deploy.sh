@@ -12,8 +12,10 @@ cp -R web/. "$SITE/"
 rm -f "$SITE/pkg/.gitignore" # wasm-pack generates it with '*' — it would exclude pkg from the commit
 touch "$SITE/.nojekyll"
 
-# cache-busting: stamp every cross-file reference in html + js
-find "$SITE" -maxdepth 2 -name '*.js' -o -maxdepth 2 -name '*.html' | while read -r f; do
+# cache-busting: stamp cross-file references in the html and app modules.
+# NEVER touch pkg/ — the glue's internal wasm-import key ("./zygfred_engine_bg.js")
+# must match the name baked into the wasm binary.
+for f in "$SITE"/index.html "$SITE"/app/*.js; do
   sed -i '' -E "s|(\.(js\|css\|wasm))(['\"])|\1?v=$VER\3|g" "$f"
 done
 
