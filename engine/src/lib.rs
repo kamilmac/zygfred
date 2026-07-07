@@ -1,9 +1,8 @@
-//! zygfred-web — the zygfred FM drum engine compiled to WebAssembly.
+//! zygfred-engine — the FM drum engine, compiled to WebAssembly.
 //!
-//! DSP core duplicated from src/bin/zygfred.rs (voice + master chain); this crate adds a
-//! numeric-only wasm-bindgen surface so it can run inside an AudioWorklet: trigger / set params /
-//! process 128-frame blocks. No strings cross the boundary (AudioWorkletGlobalScope lacks
-//! TextDecoder).
+//! Three-voice FM percussion (voice graph + master chain) with a numeric-only wasm-bindgen
+//! surface so it can run inside an AudioWorklet: trigger / set params / process 128-frame
+//! blocks. No strings cross the boundary (AudioWorkletGlobalScope lacks TextDecoder).
 
 use fundsp::prelude64::*;
 use wasm_bindgen::prelude::*;
