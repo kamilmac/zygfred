@@ -28,8 +28,10 @@ function trigger(drum, vel = 0.9) {
 function applyState(st) {
   st.drums.forEach((p, d) => p.forEach((v, i) => surface.controls[d * PARAMS.length + i]?.apply(v)));
   const base = DRUMS.length * PARAMS.length;
-  st.master.forEach((v, mi) => { if (mi !== 3) surface.controls[base + mi]?.apply(v); });
-  surface.controls[base + 3]?.apply(st.bits / (BIT_OPTIONS.length - 1));
+  MASTER.forEach((m, mi) => {
+    if (m.msg === 'bits') surface.controls[base + mi]?.apply(st.bits / (BIT_OPTIONS.length - 1));
+    else if (st.master[m.msg] !== undefined) surface.controls[base + mi]?.apply(st.master[m.msg]);
+  });
   surface.updateAllBands();
   scope.drawAll();
 }

@@ -18,11 +18,12 @@ export const BIT_OPTIONS = [
   ['off', 0], ['12bit', 2048], ['8bit', 128], ['6bit', 32], ['4bit', 8], ['3bit', 4],
 ];
 
+// ordered as the signal flows through the engine: reverb -> drive -> bits -> comp -> volume
 export const MASTER = [
-  { name: 'Drive', msg: 'drive', value: 0.0 },
   { name: 'Reverb', msg: 'reverb', value: 0.0 },
-  { name: 'Comp', msg: 'comp', value: 0.0 },
+  { name: 'Drive', msg: 'drive', value: 0.0 },
   { name: 'Bits', msg: 'bits', value: 0.0 }, // value unused; bits live in state.bitsIdx
+  { name: 'Comp', msg: 'comp', value: 0.0 },
   { name: 'Volume', msg: 'volume', value: 0.7 },
 ];
 
@@ -65,5 +66,7 @@ export function hitTakes(drum, vel = 0.9) {
 }
 
 export function snapshot() {
-  return { drums: drums.map((p) => [...p]), master: MASTER.map((m) => m.value), bits: state.bitsIdx };
+  // master values keyed by name — immune to strip reordering
+  const master = Object.fromEntries(MASTER.filter((m) => m.msg !== 'bits').map((m) => [m.msg, m.value]));
+  return { drums: drums.map((p) => [...p]), master, bits: state.bitsIdx };
 }
