@@ -1,4 +1,4 @@
-# ◆ zygfred
+# ▲ zygfred
 
 An FM drum machine that lives in the browser.
 
