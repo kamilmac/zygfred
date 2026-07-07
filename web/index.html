@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>zygfred · FM drums</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png">
+<meta name="theme-color" content="#0b0b0b">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="locked" hidden>MIDI received &#183; audio is locked by the browser &#183; click anywhere</div>
+  <div id="voices"></div>
+  <div id="master"></div>
+  <div id="presets"></div>
+  <div id="midi"></div>
+  <footer>
+    <span class="brand"><span class="mark">&#9670;</span> zygfred <span class="sub">&#183; FM drums</span></span>
+    <span><button id="help-open" title="help">?</button></span>
+  </footer>
+  <div id="help" hidden>
+    <div class="sheet">
+      <h2>TRIGGER</h2>
+      <p><span class="key">a / s / d</span> play kick / snare / hihat &#183; so does any MIDI note with a C / D / E pitch class, velocity-sensitive &#183; clicking the pads works too</p>
+      <h2>BARS</h2>
+      <p>click or drag to set &#183; scroll to nudge &#183; the soft band is <span class="key">Rand</span>&#8217;s reach &#8212; each hit lands somewhere inside it, and the white tick flashes where</p>
+      <h2>SCOPE</h2>
+      <p>the last hit&#8217;s waveform &#8212; left channel, before the master effects</p>
+      <h2>MIDI</h2>
+      <p>pick a channel (or Omni) &#183; <span class="key">learn</span>: click learn, click a slider, turn a knob on your controller &#183; mappings persist in this browser</p>
+      <h2>PRESETS</h2>
+      <p>hold a slot for a moment to save the current patch &#183; click a slot (or press <span class="key">1&#8211;8</span>) to load &#183; stored in this browser</p>
+      <h2>APP</h2>
+      <p>install via Chrome (address-bar install icon) for a dock app where MIDI makes sound without clicking first</p>
+    </div>
+  </div>
+  <script type="module" src="./app/main.js"></script>
+</body>
+</html>
