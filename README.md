@@ -2,7 +2,7 @@
 
 An FM drum machine that lives in the browser.
 
-**Play it: https://kamilmac.github.io/zygfred/**
+**Play it: https://zygfred.zweibel-cocaine.com/**
 
 Three FM percussion voices — kick, snare, hihat — synthesized in Rust (fundsp), compiled to
 WebAssembly, rendered in an AudioWorklet. Play it with the `a`/`s`/`d` keys, the pads, or any
@@ -29,7 +29,7 @@ web/
     presets.js    8 slots, hold to save, localStorage
     main.js       orchestration — the only place domains meet
   index.html / styles.css
-deploy.sh   builds the engine and publishes web/ to gh-pages (cache-busted URLs)
+deploy.sh   builds the engine, bundles the app (esbuild), publishes to Cloudflare Pages
 ```
 
 ## Develop
