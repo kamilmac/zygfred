@@ -18,14 +18,14 @@
 
   /* accents: warm-white chassis, rose / amber / mint voices */
   --accent: #f1e9e5;
-  --voice0: #c7757f;
-  --voice1: #e0b25d;
-  --voice2: #abd7cc;
+  --voice0: #d86471;
+  --voice1: #eab140;
+  --voice2: #8fdfc7;
   --tick: #fff;
 
   /* type */
-  --font: 300 13px/1.5 "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
-  --weight-strong: 500;
+  --font: 200 13px/1.5 "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --weight-strong: 400;
   --text-small: 12px;
   --tracking: 1px;
   --tracking-wide: 2px;
