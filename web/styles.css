@@ -24,7 +24,7 @@ body {
 .voice[data-voice="1"] { --accent: var(--voice1); }
 .voice[data-voice="2"] { --accent: var(--voice2); }
 .voice {
-  background: var(--panel);
+  border: 1px solid var(--line);
   padding: var(--sp-section);
   width: var(--voice-width);
   display: flex;
@@ -42,7 +42,7 @@ body {
   border: none;
   color: var(--accent);
   font: inherit;
-  font-weight: 700;
+  font-weight: var(--weight-strong);
   letter-spacing: var(--tracking-wide);
   padding: var(--sp-block);
   cursor: pointer;
@@ -73,7 +73,7 @@ body {
 .bar {
   flex: 1;
   height: var(--bar-h);
-  background: repeating-linear-gradient(90deg, var(--track) 0 var(--seg), transparent var(--seg) var(--seg-period));
+  background: var(--track);
   cursor: ew-resize;
   touch-action: none;
   overflow: hidden;
@@ -81,7 +81,7 @@ body {
 }
 .fill {
   height: 100%;
-  background: repeating-linear-gradient(90deg, var(--accent) 0 var(--seg), transparent var(--seg) var(--seg-period));
+  background: var(--accent);
   pointer-events: none;
 }
 .range {
@@ -106,7 +106,7 @@ body {
   background: color-mix(in srgb, var(--accent) 7%, transparent);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 7%, transparent);
 }
-.row.rand-on .label { color: var(--accent); font-weight: 700; }
+.row.rand-on .label { color: var(--accent); font-weight: var(--weight-strong); }
 .row.rand-on .val { color: var(--accent); }
 .scope {
   width: 100%;
@@ -119,7 +119,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: var(--sp-row) 32px;
-  background: var(--panel);
+  border: 1px solid var(--line);
   padding: var(--sp-section);
   margin-top: var(--sp-section);
   width: min(var(--app-width), 100%);
@@ -129,7 +129,7 @@ body {
   display: flex;
   align-items: center;
   gap: var(--sp-row);
-  background: var(--panel);
+  border: 1px solid var(--line);
   padding: var(--sp-block) var(--sp-section);
   margin-top: var(--sp-section);
   width: min(var(--app-width), 100%);
@@ -188,7 +188,7 @@ body {
   right: 0;
   background: var(--accent);
   color: var(--bg);
-  font-weight: 700;
+  font-weight: var(--weight-strong);
   letter-spacing: var(--tracking);
   text-align: center;
   padding: 10px;
@@ -207,7 +207,7 @@ footer {
   font-size: var(--text-small);
   margin-top: var(--sp-section);
 }
-footer .brand { color: var(--idle); font-weight: 700; letter-spacing: var(--tracking-wide); }
+footer .brand { color: var(--idle); font-weight: var(--weight-strong); letter-spacing: var(--tracking-wide); }
 footer .brand .mark { color: var(--accent); }
 footer .brand .sub { color: var(--faint); font-weight: 400; letter-spacing: var(--tracking); }
 footer .home { color: var(--faint); text-decoration: none; }
@@ -225,7 +225,8 @@ footer .home:hover { color: var(--accent); }
   position: fixed;
   right: 22px;
   bottom: 58px;
-  background: var(--panel);
+  background: var(--bg);
+  border: 1px solid var(--line);
   padding: var(--sp-section);
   display: flex;
   flex-direction: column;
@@ -286,7 +287,8 @@ footer .home:hover { color: var(--accent); }
 }
 #help[hidden] { display: none; }
 #help .sheet {
-  background: var(--panel);
+  background: var(--bg);
+  border: 1px solid var(--line);
   padding: 24px 28px;
   width: min(560px, calc(100% - 48px));
   max-height: 80vh;

@@ -4,26 +4,28 @@
 :root {
   color-scheme: dark;
 
-  /* surfaces — navy family around #222e50, darkest to lightest */
-  --bg: hsl(226 40% 15%);
-  --inset: hsl(226 40% 11%);
-  --panel: #222e50;
-  --track: hsl(226 28% 32%);
+  /* surfaces — near-black with a cool cast, darkest to lightest */
+  --bg: #0b0b0e;
+  --inset: hsl(240 12% 2.5%);
+  --panel: hsl(240 10% 9%);
+  --track: hsl(240 8% 16%);
+  --line: hsl(240 10% 10%); /* hairline section borders — a whisper above the bg */
 
-  /* ink — cool greys sharing the navy hue */
-  --idle: hsl(226 22% 78%);
-  --dim: hsl(226 15% 60%);
-  --faint: hsl(226 14% 48%);
+  /* ink — cool greys */
+  --idle: hsl(240 8% 76%);
+  --dim: hsl(240 6% 52%);
+  --faint: hsl(240 6% 38%);
 
-  /* accents (coolors: 222e50-007991-439a86-bcd8c1-e9d985): sage chassis, teal->straw voices */
-  --accent: #bcd8c1;
-  --voice0: #007991;
-  --voice1: #439a86;
-  --voice2: #e9d985;
+  /* accents: warm-white chassis, rose / amber / mint voices */
+  --accent: #f1e9e5;
+  --voice0: #c7757f;
+  --voice1: #e0b25d;
+  --voice2: #abd7cc;
   --tick: #fff;
 
   /* type */
-  --font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+  --font: 300 13px/1.5 "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --weight-strong: 500;
   --text-small: 12px;
   --tracking: 1px;
   --tracking-wide: 2px;
@@ -39,11 +41,9 @@
   /* dimensions */
   --app-width: 886px;
   --voice-width: 282px;
-  --bar-h: 13px;
+  --bar-h: 6px;
   --scope-h: 58px;
   --slot-w: 28px;
   --label-w: 52px;
   --val-w: 40px;
-  --seg: 6px;        /* bar segment width */
-  --seg-period: 8px; /* segment + gap */
 }

@@ -76,6 +76,7 @@ function apply(colors) {
   root.setProperty('--bg', c(s, l - 7));
   root.setProperty('--inset', c(s, l - 11));
   root.setProperty('--track', c(s - 12, l + 10));
+  root.setProperty('--line', c(s - 14, l + 6));
   root.setProperty('--idle', c(Math.min(s, 22), 78));
   root.setProperty('--dim', c(Math.min(s, 15), 60));
   root.setProperty('--faint', c(Math.min(s, 14), 48));
@@ -87,7 +88,7 @@ function apply(colors) {
 
 function clear() {
   const root = document.documentElement.style;
-  ['--panel', '--bg', '--inset', '--track', '--idle', '--dim', '--faint',
+  ['--panel', '--bg', '--inset', '--track', '--line', '--idle', '--dim', '--faint',
     '--accent', '--voice0', '--voice1', '--voice2'].forEach((p) => root.removeProperty(p));
 }
 
