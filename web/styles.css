@@ -234,6 +234,15 @@ footer .home:hover { color: var(--accent); }
   z-index: 20;
 }
 #theme[hidden] { display: none; }
+#theme-sets { display: flex; gap: var(--sp-row); }
+#theme-sets .swatch {
+  width: 40px;
+  height: 22px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+#theme-sets .swatch:hover { outline: 1px solid var(--idle); }
 .theme-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--dim); }
 .theme-row input {
   width: 44px;

@@ -11,6 +11,16 @@ const FIELDS = [
   ['master', '--accent'],
 ];
 
+// curated sets: surface + kick/snare/hihat/master, designed to work together
+const THEMES = [
+  ['carbon', { surface: '#161616', kick: '#7dc9d1', snare: '#b8486d', hihat: '#d8bf5f', master: '#f0eeea' }],
+  ['navy', { surface: '#222e50', kick: '#007991', snare: '#439a86', hihat: '#e9d985', master: '#bcd8c1' }],
+  ['rust', { surface: '#26201b', kick: '#e07a5f', snare: '#f2cc8f', hihat: '#81b29a', master: '#f4f1de' }],
+  ['forest', { surface: '#1d2a23', kick: '#7fb069', snare: '#e6aa68', hihat: '#cfe1b9', master: '#ecf4e7' }],
+  ['dusk', { surface: '#241f3d', kick: '#8e7dff', snare: '#ff7edb', hihat: '#ffd166', master: '#efeafc' }],
+  ['port', { surface: '#2a1a24', kick: '#d4707e', snare: '#e8b04b', hihat: '#9fd8cb', master: '#f2e9e4' }],
+];
+
 let onChange = () => {};
 
 export function init(deps) {
@@ -93,6 +103,20 @@ export function build() {
     onChange();
   };
   FIELDS.forEach(([name]) => inputs[name].addEventListener('input', update));
+  const sets = document.querySelector('#theme-sets');
+  for (const [name, colors] of THEMES) {
+    const b = document.createElement('button');
+    b.className = 'swatch';
+    b.title = name;
+    const stops = [colors.surface, colors.kick, colors.snare, colors.hihat, colors.master]
+      .map((col, i) => `${col} ${i * 20}% ${(i + 1) * 20}%`).join(', ');
+    b.style.background = `linear-gradient(90deg, ${stops})`;
+    b.addEventListener('click', () => {
+      FIELDS.forEach(([n]) => { inputs[n].value = colors[n]; });
+      update();
+    });
+    sets.append(b);
+  }
   document.querySelector('#theme-reset').addEventListener('click', () => {
     localStorage.removeItem(KEY);
     clear(); // back to theme.css defaults
