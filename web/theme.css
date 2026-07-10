@@ -5,16 +5,17 @@
   color-scheme: dark;
 
   /* surfaces — near-black with a cool cast, darkest to lightest */
-  --bg: #252222;
-  --inset: hsl(0 4% 9%);
-  --panel: hsl(0 4% 17%);
-  --track: hsl(0 4% 25%);
-  --line: hsl(0 4% 18%); /* hairline section borders — a whisper above the bg */
+  /* the family the ⚙ modal derives from surface #2d2a2a */
+  --bg: hsl(0 3% 10%);
+  --inset: hsl(0 3% 6%);
+  --panel: #2d2a2a;
+  --track: hsl(0 0% 27%);
+  --line: hsl(0 0% 23%); /* hairline section borders — a whisper above the bg */
 
-  /* ink — cool greys */
-  --idle: hsl(240 8% 76%);
-  --dim: hsl(240 6% 52%);
-  --faint: hsl(240 6% 38%);
+  /* ink — warm-neutral greys */
+  --idle: hsl(0 3% 78%);
+  --dim: hsl(0 3% 60%);
+  --faint: hsl(0 3% 48%);
 
   /* accents: warm-white chassis, rose / amber / mint voices */
   --accent: #f1e9e5;
