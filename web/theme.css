@@ -4,22 +4,22 @@
 :root {
   color-scheme: dark;
 
-  /* surfaces, darkest to lightest */
-  --bg: #0c0c0c;
-  --inset: hsl(0 0% 2.8%);
-  --panel: hsl(0 0% 8% / 1);
-  --track: hsl(0 0% 12.8%);
+  /* surfaces — navy family around #222e50, darkest to lightest */
+  --bg: hsl(226 40% 15%);
+  --inset: hsl(226 40% 11%);
+  --panel: #222e50;
+  --track: hsl(226 28% 32%);
 
-  /* ink */
-  --idle: hsl(0 12% 69%);
-  --dim: hsl(0 13% 42%);
-  --faint: hsl(0 13% 32%);
+  /* ink — cool greys sharing the navy hue */
+  --idle: hsl(226 22% 78%);
+  --dim: hsl(226 15% 60%);
+  --faint: hsl(226 14% 48%);
 
-  /* accents: white chassis + one color per voice/channel */
-  --accent: #f0eeea;
-  --voice0: #7dc9d1;
-  --voice1: #b8486d;
-  --voice2: #d8bf5f;
+  /* accents (coolors: 222e50-007991-439a86-bcd8c1-e9d985): sage chassis, teal->straw voices */
+  --accent: #bcd8c1;
+  --voice0: #007991;
+  --voice1: #439a86;
+  --voice2: #e9d985;
   --tick: #fff;
 
   /* type */

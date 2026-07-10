@@ -6,7 +6,7 @@
 <title>zygfred · FM drums</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon-192.png">
-<meta name="theme-color" content="#0c0c0c">
+<meta name="theme-color" content="#171d36">
 <link rel="stylesheet" href="./theme.css">
 <link rel="stylesheet" href="./styles.css">
 </head>
@@ -18,8 +18,16 @@
   <div id="midi"></div>
   <footer>
     <span class="brand"><span class="mark">&#9650;</span> zygfred <span class="sub">&#183; FM drums</span></span>
-    <span><a class="home" href="https://zweibel-cocaine.com">zweibel&#8209;cocaine</a> &#183; <button id="help-open" title="help">?</button></span>
+    <span><a class="home" href="https://zweibel-cocaine.com">zweibel&#8209;cocaine</a> &#183; <button id="help-open" title="help">?</button> <button id="theme-open" title="colors">&#9881;</button></span>
   </footer>
+  <div id="theme" hidden>
+    <div class="theme-row"><span>surface</span><input type="color" id="theme-surface"></div>
+    <div class="theme-row"><span>kick</span><input type="color" id="theme-kick"></div>
+    <div class="theme-row"><span>snare</span><input type="color" id="theme-snare"></div>
+    <div class="theme-row"><span>hihat</span><input type="color" id="theme-hihat"></div>
+    <div class="theme-row"><span>master</span><input type="color" id="theme-master"></div>
+    <button id="theme-reset">reset</button>
+  </div>
   <div id="help" hidden>
     <div class="sheet">
       <p>Press <span class="key">a s d</span> &#8212; kick, snare, hihat &#8212; or tap the pads. Then grab sliders while you play: the block above the scope shapes the tone (pitch, FM character, the pitch sweep), the block below shapes the body (how long it rings, how much noise snap, how bright that noise is). The scope draws every hit you fire.</p>

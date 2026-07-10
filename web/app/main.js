@@ -7,6 +7,7 @@ import * as surface from './surface.js';
 import * as scope from './scope.js';
 import * as midi from './midi.js';
 import * as presets from './presets.js';
+import * as theme from './theme.js';
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -39,10 +40,12 @@ function applyState(st) {
 surface.init({ onPad: trigger, send: engine.send, pickControl: midi.tryArmLearn, registerCanvas: scope.registerCanvas });
 midi.init({ trigger, controls: surface.controls, onLockedNote: () => { if (engine.suspended()) $('#locked').hidden = false; } });
 presets.init({ snapshot, apply: applyState });
+theme.init({ onChange: scope.drawAll }); // scopes paint in voice colors
 
 surface.build();
 presets.build();
 midi.build();
+theme.build();
 
 // help sheet
 $('#help-open').addEventListener('click', () => { $('#help').hidden = false; });

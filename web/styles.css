@@ -8,6 +8,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: safe center;
   padding: var(--sp-section) var(--sp-page-x) var(--sp-page);
   user-select: none;
   -webkit-user-select: none;
@@ -211,6 +212,46 @@ footer .brand .mark { color: var(--accent); }
 footer .brand .sub { color: var(--faint); font-weight: 400; letter-spacing: var(--tracking); }
 footer .home { color: var(--faint); text-decoration: none; }
 footer .home:hover { color: var(--accent); }
+#theme-open {
+  background: none;
+  border: none;
+  color: var(--faint);
+  font: inherit;
+  cursor: pointer;
+  padding: 0 2px;
+}
+#theme-open:hover { color: var(--accent); }
+#theme {
+  position: fixed;
+  right: 22px;
+  bottom: 58px;
+  background: var(--panel);
+  padding: var(--sp-section);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-block);
+  box-shadow: 0 6px 30px color-mix(in srgb, #000 45%, transparent);
+  z-index: 20;
+}
+#theme[hidden] { display: none; }
+.theme-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--dim); }
+.theme-row input {
+  width: 44px;
+  height: 26px;
+  border: none;
+  background: var(--inset);
+  padding: 2px;
+  cursor: pointer;
+}
+#theme-reset {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  border: none;
+  color: var(--dim);
+  font: inherit;
+  padding: 4px 0;
+  cursor: pointer;
+}
+#theme-reset:hover { color: var(--idle); }
 #help-open {
   background: none;
   border: none;
