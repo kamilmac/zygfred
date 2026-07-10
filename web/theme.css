@@ -5,11 +5,11 @@
   color-scheme: dark;
 
   /* surfaces — near-black with a cool cast, darkest to lightest */
-  --bg: #232323;
-  --inset: hsl(0 0% 9%);
-  --panel: hsl(0 0% 17%);
-  --track: hsl(0 0% 25%);
-  --line: hsl(0 0% 18%); /* hairline section borders — a whisper above the bg */
+  --bg: #252222;
+  --inset: hsl(0 4% 9%);
+  --panel: hsl(0 4% 17%);
+  --track: hsl(0 4% 25%);
+  --line: hsl(0 4% 18%); /* hairline section borders — a whisper above the bg */
 
   /* ink — cool greys */
   --idle: hsl(240 8% 76%);
