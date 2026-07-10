@@ -5,12 +5,12 @@
   color-scheme: dark;
 
   /* surfaces — near-black with a cool cast, darkest to lightest */
-  /* the family the ⚙ modal derives from surface #2d2a2a */
-  --bg: hsl(0 3% 10%);
-  --inset: hsl(0 3% 6%);
-  --panel: #2d2a2a;
-  --track: hsl(0 0% 27%);
-  --line: hsl(0 0% 23%); /* hairline section borders — a whisper above the bg */
+  /* warm charcoal family (the #2d2a2a derivation, nudged a step darker) */
+  --bg: hsl(0 3% 8%);
+  --inset: hsl(0 3% 5%);
+  --panel: #282525;
+  --track: hsl(0 0% 25%);
+  --line: hsl(0 0% 21%); /* hairline section borders — a whisper above the bg */
 
   /* ink — warm-neutral greys */
   --idle: hsl(0 3% 78%);
