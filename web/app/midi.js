@@ -29,6 +29,17 @@ function saveCcMap() {
   localStorage.setItem(CC_KEY, JSON.stringify(ccMap));
 }
 
+/// CC bindings for preset embedding — undefined when nothing is learned
+export function ccSnapshot() {
+  return Object.keys(ccMap).length ? { ...ccMap } : undefined;
+}
+
+export function applyCcMap(map) {
+  ccMap = { ...map };
+  saveCcMap();
+  refreshStatus();
+}
+
 function refreshStatus() {
   if (!els.status || !midiAccess) return;
   const names = [...midiAccess.inputs.values()].map((p) => p.name);

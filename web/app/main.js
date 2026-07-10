@@ -39,7 +39,19 @@ function applyState(st) {
 
 surface.init({ onPad: trigger, send: engine.send, pickControl: midi.tryArmLearn, registerCanvas: scope.registerCanvas });
 midi.init({ trigger, controls: surface.controls, onLockedNote: () => { if (engine.suspended()) $('#locked').hidden = false; } });
-presets.init({ snapshot, apply: applyState });
+presets.init({
+  // presets carry CC bindings when any exist; presets without them leave current bindings alone
+  snapshot: () => {
+    const st = snapshot();
+    const cc = midi.ccSnapshot();
+    if (cc) st.cc = cc;
+    return st;
+  },
+  apply: (st) => {
+    applyState(st);
+    if (st.cc) midi.applyCcMap(st.cc);
+  },
+});
 theme.init({ onChange: scope.drawAll }); // scopes paint in voice colors
 
 surface.build();
