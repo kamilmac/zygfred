@@ -92,6 +92,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     midi.disarmLearn();
     $('#help').hidden = true;
+    $('#theme').hidden = true;
     return;
   }
   if (e.repeat || e.metaKey || e.ctrlKey || e.target.tagName === 'SELECT') return;

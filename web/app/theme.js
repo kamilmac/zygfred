@@ -99,8 +99,12 @@ export function build() {
     refresh();
     onChange();
   });
-  document.querySelector('#theme-open').addEventListener('click', () => {
+  const openBtn = document.querySelector('#theme-open');
+  openBtn.addEventListener('click', () => {
     refresh();
     modal.hidden = !modal.hidden;
+  });
+  document.addEventListener('pointerdown', (e) => {
+    if (!modal.hidden && !modal.contains(e.target) && e.target !== openBtn) modal.hidden = true;
   });
 }
