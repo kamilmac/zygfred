@@ -84,6 +84,14 @@ function fitWindow() {
 }
 requestAnimationFrame(fitWindow);
 
+// ---------- zyg bridge: raw MIDI bytes from a sibling app (zygmund) over postMessage ----------
+
+window.addEventListener('message', (e) => {
+  const d = e.data;
+  if (!d || d.type !== 'zyg-midi' || !Array.isArray(d.data) || d.data.length < 3) return;
+  midi.onMidiMessage({ data: Uint8Array.from(d.data.slice(0, 3)) });
+});
+
 // ---------- global input ----------
 
 // browsers require one user gesture before audio can run — hijack the first natural one
