@@ -89,7 +89,10 @@ requestAnimationFrame(fitWindow);
 window.addEventListener('message', (e) => {
   const d = e.data;
   if (!d || d.type !== 'zyg-midi' || !Array.isArray(d.data) || d.data.length < 3) return;
-  midi.onMidiMessage({ data: Uint8Array.from(d.data.slice(0, 3)) });
+  const fire = () => midi.onMidiMessage({ data: Uint8Array.from(d.data.slice(0, 3)) });
+  // sender posts ahead of time and delegates the delay to us — the focused, unthrottled window
+  const delay = Math.min(2000, Math.max(0, +d.in || 0));
+  delay > 1 ? setTimeout(fire, delay) : fire();
 });
 
 // ---------- global input ----------
